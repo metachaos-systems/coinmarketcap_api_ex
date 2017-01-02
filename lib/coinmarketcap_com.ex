@@ -7,7 +7,18 @@ defmodule CoinmarketcapApi do
   Data is in the format of [time, value] where time is measured in ticks(milliseconds since the start of unix era)
   """
   def fetch_coin_data(name) do
-    result = get("https://api.coinmarketcap.com/v1/datapoints/" <> name <> "/") # slash is canonical path, URL without slash redirects
+    "https://api.coinmarketcap.com/v1/datapoints/" <> name <> "/" # slash is canonical path, URL without slash redirects
+    |> get()
+    |> process_result()
+  end
+
+  def fetch_known_coins_data() do
+    "https://files.coinmarketcap.com/generated/search/quick_search.json"
+    |> get()
+    |> process_result()
+  end
+
+  def process_result(result) do
     with {:ok, response} <- result,
       body = response.body,
       do: {:ok, body},
