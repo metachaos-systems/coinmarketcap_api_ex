@@ -8,13 +8,13 @@ defmodule CoinmarketcapApi do
   """
   def fetch_coin_data(name) do
     "https://api.coinmarketcap.com/v1/datapoints/" <> name <> "/" # slash is canonical path, URL without slash redirects
-    |> get()
+    |> get([],[timeout: 15_000])
     |> process_result()
   end
 
   def fetch_known_coins_data() do
     "https://files.coinmarketcap.com/generated/search/quick_search.json"
-    |> get()
+    |> get([],[timeout: 15_000])
     |> process_result()
   end
 
