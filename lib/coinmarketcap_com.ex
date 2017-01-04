@@ -31,6 +31,12 @@ defmodule CoinmarketcapApi do
     |> process_result()
   end
 
+  def global_data() do
+    "https://api.coinmarketcap.com/v1/global/ "
+    |> get([],[timeout: 15_000])
+    |> process_result()
+  end
+
   def process_result(result) do
     with {:ok, response} <- result,
       body = response.body,
