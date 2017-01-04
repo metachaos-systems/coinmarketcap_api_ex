@@ -18,6 +18,18 @@ defmodule CoinmarketcapApi do
     |> process_result()
   end
 
+
+  def ticker() do
+    "https://api.coinmarketcap.com/v1/ticker/"
+    |> get([],[timeout: 15_000])
+    |> process_result()
+  end
+
+  def ticker(coin) when is_bitstring(coin) do
+    "https://api.coinmarketcap.com/v1/ticker/" <> coin
+    |> get([],[timeout: 15_000])
+    |> process_result()
+  end
   def process_result(result) do
     with {:ok, response} <- result,
       body = response.body,
