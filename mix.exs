@@ -40,14 +40,14 @@ defmodule CoinmarketcapApi.Mixfile do
 
   defp description do
     """
-    This is work in progress.
-    Coinmarketcap.com API wrapper for Elixir. Provides access to market data for cryptocurrencies like Ethereum, Bitcoin, Monero, etc.
+    Coinmarketcap.com API wrapper for Elixir/Erlang.
+    Provides access to ticker and historical data for cryptocurrencies like Ethereum, Bitcoin, Monero, etc.
     """
   end
 
   defp package do
     [# These are the default files included in the package
-     files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+     files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["ontofractal"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/cyberpunk-ventures/coinmarketcap_api_ex"}]
