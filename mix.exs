@@ -47,7 +47,7 @@ defmodule CoinmarketcapApi.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-     files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["ontofractal"],
      licenses: ["MIT"],
      links: %{"GitHub" => "https://github.com/cyberpunk-ventures/coinmarketcap_api_ex"}]
