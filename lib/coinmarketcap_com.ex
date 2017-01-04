@@ -19,19 +19,19 @@ defmodule CoinmarketcapApi do
   end
 
 
-  def ticker() do
+  def fetch_ticker() do
     "https://api.coinmarketcap.com/v1/ticker/"
       |> get([],@http_opts)
       |> process_result()
   end
 
-  def ticker(coin) when is_bitstring(coin) do
+  def fetch_ticker(coin) when is_bitstring(coin) do
     "https://api.coinmarketcap.com/v1/ticker/#{coin}/"
       |> get([],@http_opts)
       |> process_result()
   end
 
-  def global_data() do
+  def fetch_global_data() do
     "https://api.coinmarketcap.com/v1/global/"
       |> get([],@http_opts)
       |> process_result()

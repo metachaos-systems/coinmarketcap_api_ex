@@ -14,17 +14,17 @@ defmodule CoinmarketcapApiTest do
   end
 
   test "all tickers" do
-    {:ok, data} = ticker()
+    {:ok, data} = fetch_ticker()
     assert [%{"id" => _, "24h_volume_usd" => _} | _ ] = data
   end
 
   test "bitcoin tickers" do
-    {:ok, data} = ticker("bitcoin")
+    {:ok, data} = fetch_ticker("bitcoin")
     assert [%{"id" => _, "24h_volume_usd" => _, "symbol" => "BTC"} | _ ] = data
   end
 
   test "global data" do
-    {:ok, data} = global_data()
+    {:ok, data} = fetch_global_data()
     assert %{"active_assets" => _} = data
   end
 end
