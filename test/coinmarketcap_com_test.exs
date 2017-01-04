@@ -22,4 +22,9 @@ defmodule CoinmarketcapApiTest do
     {:ok, data} = ticker("bitcoin")
     assert [%{"id" => _, "24h_volume_usd" => _, "symbol" => "BTC"} | _ ] = data
   end
+
+  test "global data" do
+    {:ok, data} = global_data()
+    assert %{"active_assets" => _} = data
+  end
 end

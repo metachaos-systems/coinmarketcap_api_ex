@@ -32,7 +32,7 @@ defmodule CoinmarketcapApi do
   end
 
   def global_data() do
-    "https://api.coinmarketcap.com/v1/global/ "
+    "https://api.coinmarketcap.com/v1/global/"
       |> get([],@http_opts)
       |> process_result()
   end
