@@ -1,8 +1,10 @@
-defmodule CoinmarketcapComTest do
+defmodule CoinmarketcapApiTest do
   use ExUnit.Case
-  doctest CoinmarketcapCom
+  doctest CoinmarketcapApi
+  import CoinmarketcapApi
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "fetch coin data for bitcoin" do
+    {:ok, data} = fetch_coin_data("bitcoin")
+    assert  %{"market_cap_by_available_supply" => [[_, _] | _ ]}  = data
   end
 end
