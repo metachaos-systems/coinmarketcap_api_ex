@@ -1,6 +1,7 @@
 defmodule CoinmarketcapApi do
   use HTTPoison.Base
   @http_opts [timeout: 15_000]
+  
   @doc """
   Intended for coinmarketcap.com for showing historical data
   Returns map with the following keys: marketcap_by_available_supply, prices_btc, prices_usd, volume_usd
