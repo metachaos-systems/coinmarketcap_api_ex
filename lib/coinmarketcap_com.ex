@@ -1,6 +1,6 @@
 defmodule CoinmarketcapApi do
   use HTTPoison.Base
-
+  @http_opts [timeout: 15_000]
   @doc """
   Intended for coinmarketcap.com for showing historical data
   Returns map with the following keys: marketcap_by_available_supply, prices_btc, prices_usd, volume_usd
@@ -8,33 +8,33 @@ defmodule CoinmarketcapApi do
   """
   def fetch_coin_data(name) do
     "https://api.coinmarketcap.com/v1/datapoints/" <> name <> "/" # slash is canonical path, URL without slash redirects
-    |> get([],[timeout: 15_000])
-    |> process_result()
+      |> get([],@http_opts)
+      |> process_result()
   end
 
   def fetch_known_coins_data() do
     "https://files.coinmarketcap.com/generated/search/quick_search.json"
-    |> get([],[timeout: 15_000])
-    |> process_result()
+      |> get([],@http_opts)
+      |> process_result()
   end
 
 
   def ticker() do
     "https://api.coinmarketcap.com/v1/ticker/"
-    |> get([],[timeout: 15_000])
-    |> process_result()
+      |> get([],@http_opts)
+      |> process_result()
   end
 
   def ticker(coin) when is_bitstring(coin) do
     "https://api.coinmarketcap.com/v1/ticker/#{coin}/"
-    |> get([],[timeout: 15_000])
-    |> process_result()
+      |> get([],@http_opts)
+      |> process_result()
   end
 
   def global_data() do
     "https://api.coinmarketcap.com/v1/global/ "
-    |> get([],[timeout: 15_000])
-    |> process_result()
+      |> get([],@http_opts)
+      |> process_result()
   end
 
   def process_result(result) do
