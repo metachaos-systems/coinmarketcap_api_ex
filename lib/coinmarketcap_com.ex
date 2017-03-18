@@ -1,6 +1,6 @@
 defmodule CoinmarketcapApi do
   use HTTPoison.Base
-  @http_opts [timeout: 15_000]
+  @http_opts [timeout: 60_000]
 
   @doc """
   Intended for coinmarketcap.com for showing historical data
