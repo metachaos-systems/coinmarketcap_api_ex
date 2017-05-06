@@ -8,7 +8,7 @@ defmodule CoinmarketcapApi do
   Data is in the format of [time, value] where time is measured in ticks(milliseconds since the start of unix era)
   """
   def fetch_coin_data(name) do
-    "https://graphs.coinmarketcap.com/v1/datapoints/" <> name <> "/" # slash is canonical path, URL without slash redirects
+    "https://datapoints.coinmarketcap.com/currencies/" <> name <> "/" # slash is canonical path, URL without slash redirects
       |> get([],@http_opts)
       |> process_result()
   end
