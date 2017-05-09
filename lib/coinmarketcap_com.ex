@@ -1,6 +1,6 @@
 defmodule CoinmarketcapApi do
   use HTTPoison.Base
-  @http_opts [timeout: 60_000]
+  @http_opts [timeout: 60_000, recv_timeout: 60_000]
 
   @doc """
   Intended for coinmarketcap.com for showing historical data
@@ -8,7 +8,7 @@ defmodule CoinmarketcapApi do
   Data is in the format of [time, value] where time is measured in ticks(milliseconds since the start of unix era)
   """
   def fetch_coin_data(name) do
-    "https://datapoints.coinmarketcap.com/currencies/" <> name <> "/" # slash is canonical path, URL without slash redirects
+    "https://graphs.coinmarketcap.com/currencies/" <> name <> "/" # slash is canonical path, URL without slash redirects
       |> get([],@http_opts)
       |> process_result()
   end
