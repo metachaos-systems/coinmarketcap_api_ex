@@ -19,7 +19,6 @@ defmodule CoinmarketcapApi do
       |> process_result()
   end
 
-
   def fetch_ticker() do
     "https://api.coinmarketcap.com/v1/ticker/"
       |> get([],@http_opts)
@@ -28,6 +27,18 @@ defmodule CoinmarketcapApi do
 
   def fetch_ticker(coin) when is_bitstring(coin) do
     "https://api.coinmarketcap.com/v1/ticker/#{coin}/"
+      |> get([],@http_opts)
+      |> process_result()
+  end
+
+  def fetch_ticker_convert(price) when is_bitstring(price) do
+    "https://api.coinmarketcap.com/v1/ticker/?convert=#{price}"
+      |> get([],@http_opts)
+      |> process_result()
+  end
+
+  def fetch_ticker_convert(coin, price) when is_bitstring(coin) and is_bitstring(price) do
+    "https://api.coinmarketcap.com/v1/ticker/#{coin}/?convert=#{price}"
       |> get([],@http_opts)
       |> process_result()
   end

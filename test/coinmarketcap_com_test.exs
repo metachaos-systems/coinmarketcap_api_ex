@@ -18,6 +18,19 @@ defmodule CoinmarketcapApiTest do
     assert [%{"id" => _, "24h_volume_usd" => _} | _ ] = data
   end
 
+  test "all tickers with convert" do
+    {:ok, data} = fetch_ticker_convert("BRL")
+    [first | _ ] = data
+    assert Map.has_key?(first, "price_brl")
+  end
+
+  test "bitcoin tickers with convert" do
+    {:ok, data} = fetch_ticker_convert("bitcoin", "brl")
+    [first | _ ] = data
+    assert Map.has_key?(first, "price_brl")
+    assert %{"id" => _, "24h_volume_usd" => _, "symbol" => "BTC"} = first
+  end
+
   test "bitcoin tickers" do
     {:ok, data} = fetch_ticker("bitcoin")
     assert [%{"id" => _, "24h_volume_usd" => _, "symbol" => "BTC"} | _ ] = data
