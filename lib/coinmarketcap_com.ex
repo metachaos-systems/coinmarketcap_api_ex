@@ -25,6 +25,18 @@ defmodule CoinmarketcapApi do
       |> process_result()
   end
 
+  def fetch_ticker(%{start: start, limit: limit}) do
+    "https://api.coinmarketcap.com/v1/ticker/?start=#{start}&limit=#{limit}"
+      |> get([],@http_opts)
+      |> process_result()
+  end
+
+  def fetch_ticker(%{limit: limit}) do
+    "https://api.coinmarketcap.com/v1/ticker/?limit=#{limit}"
+      |> get([],@http_opts)
+      |> process_result()
+  end
+
   def fetch_ticker(coin) when is_bitstring(coin) do
     "https://api.coinmarketcap.com/v1/ticker/#{coin}/"
       |> get([],@http_opts)
