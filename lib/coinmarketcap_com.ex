@@ -1,6 +1,7 @@
 defmodule CoinmarketcapApi do
   use HTTPoison.Base
   @http_opts [timeout: 120_000, recv_timeout: 120_000]
+  @api_base_url "https://api.coinmarketcap.com/v1/"
 
   @doc """
   Intended for coinmarketcap.com for showing historical data
@@ -20,43 +21,48 @@ defmodule CoinmarketcapApi do
   end
 
   def fetch_ticker() do
-    "https://api.coinmarketcap.com/v1/ticker/"
+    ticker_url()
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker(%{start: start, limit: limit}) do
-    "https://api.coinmarketcap.com/v1/ticker/?start=#{start}&limit=#{limit}"
+    ticker_url()
+      |> Kernel.<>("?start=#{start}&limit=#{limit}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker(%{limit: limit}) do
-    "https://api.coinmarketcap.com/v1/ticker/?limit=#{limit}"
+    ticker_url()
+      |> Kernel.<>("?limit=#{limit}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker(coin) when is_bitstring(coin) do
-    "https://api.coinmarketcap.com/v1/ticker/#{coin}/"
+    ticker_url()
+      |> Kernel.<>("#{coin}/")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker_convert(price) when is_bitstring(price) do
-    "https://api.coinmarketcap.com/v1/ticker/?convert=#{price}"
+    ticker_url()
+      |> Kernel.<>("?convert=#{price}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker_convert(coin, price) when is_bitstring(coin) and is_bitstring(price) do
-    "https://api.coinmarketcap.com/v1/ticker/#{coin}/?convert=#{price}"
+    ticker_url()
+      |> Kernel.<>("#{coin}/?convert=#{price}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_global_data() do
-    "https://api.coinmarketcap.com/v1/global/"
+    global_url()
       |> get([],@http_opts)
       |> process_result()
   end
@@ -71,6 +77,10 @@ defmodule CoinmarketcapApi do
   def process_url(url) do
      url
   end
+
+  defp ticker_url(), do: @api_base_url <> "ticker/"
+
+  defp global_url(), do: @api_base_url <> "global/"
 
   defp process_request_body(body), do: body
 
