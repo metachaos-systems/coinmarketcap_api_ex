@@ -30,8 +30,8 @@ defmodule CoinmarketcapApi.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:poison, "~> 2.0"},
-      {:httpoison, "~> 0.8"},
+      {:poison, "~> 3.0"},
+      {:httpoison, "~> 1.0"},
       {:credo, "~> 0.3", only: [:test,:dev]},
       {:ex_doc, ">= 0.0.0", only: [:dev]}
     ]
