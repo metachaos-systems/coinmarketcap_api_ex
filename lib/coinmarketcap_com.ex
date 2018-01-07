@@ -27,36 +27,31 @@ defmodule CoinmarketcapApi do
   end
 
   def fetch_ticker(%{start: start, limit: limit}) do
-    ticker_url()
-      |> Kernel.<>("?start=#{start}&limit=#{limit}")
+    ticker_url("?start=#{start}&limit=#{limit}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker(%{limit: limit}) do
-    ticker_url()
-      |> Kernel.<>("?limit=#{limit}")
+    ticker_url("?limit=#{limit}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker(coin) when is_bitstring(coin) do
-    ticker_url()
-      |> Kernel.<>("#{coin}/")
+    ticker_url("#{coin}/")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker_convert(price) when is_bitstring(price) do
-    ticker_url()
-      |> Kernel.<>("?convert=#{price}")
+    ticker_url("?convert=#{price}")
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_ticker_convert(coin, price) when is_bitstring(coin) and is_bitstring(price) do
-    ticker_url()
-      |> Kernel.<>("#{coin}/?convert=#{price}")
+    ticker_url("#{coin}/?convert=#{price}")
       |> get([],@http_opts)
       |> process_result()
   end
@@ -79,6 +74,10 @@ defmodule CoinmarketcapApi do
   end
 
   defp ticker_url(), do: @api_base_url <> "ticker/"
+  defp ticker_url(params_string) do
+    ticker_url()
+      |> Kernel.<>(params_string)
+  end
 
   defp global_url(), do: @api_base_url <> "global/"
 
