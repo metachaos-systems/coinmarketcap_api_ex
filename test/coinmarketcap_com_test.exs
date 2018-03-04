@@ -18,6 +18,19 @@ defmodule CoinmarketcapApiTest do
     assert [%{"id" => _, "24h_volume_usd" => _} | _ ] = data
   end
 
+  test "tickers with limit" do
+    {:ok, data} = fetch_ticker(%{limit: 3})
+    assert length(data) == 3
+  end
+
+  test "tickers with start and limit" do
+    {:ok, data} = fetch_ticker(%{start: 5, limit: 5})
+    assert length(data) == 5
+
+    [ head | _ ] = data
+    assert head["rank"] == "6"
+  end
+
   test "all tickers with convert" do
     {:ok, data} = fetch_ticker_convert("BRL")
     [first | _ ] = data
