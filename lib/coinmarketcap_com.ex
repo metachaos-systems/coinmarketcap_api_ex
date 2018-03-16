@@ -9,13 +9,13 @@ defmodule CoinmarketcapApi do
   Data is in the format of [time, value] where time is measured in ticks(milliseconds since the start of unix era)
   """
   def fetch_coin_data(name) do
-    "https://graphs.coinmarketcap.com/currencies/" <> name <> "/" # slash is canonical path, URL without slash redirects
+    "https://graphs2.coinmarketcap.com/currencies/" <> name <> "/" # slash is canonical path, URL without slash redirects
       |> get([],@http_opts)
       |> process_result()
   end
 
   def fetch_known_coins_data() do
-    "https://files.coinmarketcap.com/generated/search/quick_search.json"
+    "https://s2.coinmarketcap.com/generated/search/quick_search.json"
       |> get([],@http_opts)
       |> process_result()
   end
