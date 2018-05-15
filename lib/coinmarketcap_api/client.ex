@@ -186,6 +186,4 @@ defmodule CoinmarketcapApi.V2Client do
     get("/global/", query: [convert: currency])
   end
 
-  defp construct_ticker(data) do
-  end
 end
