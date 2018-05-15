@@ -16,7 +16,7 @@ defmodule CoinmarketcapApi.V2ClientTest do
   test "tickers with start and limit" do
     {:ok, %{data: data}} = fetch_ticker([start: 5, limit: 5])
     {id, ticker_data} = hd(Map.to_list(data))
-    assert %{id: _, quotes:  _, symbol:  _} = ticker_data
+    assert %{id: ^id, quotes:  _, symbol:  _} = ticker_data
   end
 
   test "bitcoin tickers" do
