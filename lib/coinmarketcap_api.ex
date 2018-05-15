@@ -1,4 +1,4 @@
-defmodule CoinmarketcapApi.V2Client do
+defmodule CoinmarketcapApi do
   alias CoinmarketcapApi.Ticker
   use Tesla
 
@@ -185,5 +185,4 @@ defmodule CoinmarketcapApi.V2Client do
   def fetch_global_data(%{convert: currency}) do
     get("/global/", query: [convert: currency])
   end
-
 end

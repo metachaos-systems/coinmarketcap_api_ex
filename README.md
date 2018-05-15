@@ -1,6 +1,6 @@
 # Unofficial Coinmarketcap.com v2 API client
 
-This module implements v2 Coinmarketcap API with minimal changes to API structure.
+This module implements v2 Coinmarketcap API with minimal changes to API structure. Use 1.x.x version for previous CMC API.
 
 All CMC API endpoints are called using fetch_#{endpoint} functions and return success tuple with `%CoinmarketcapApi.Response{}` containing :data and :metadata.
 

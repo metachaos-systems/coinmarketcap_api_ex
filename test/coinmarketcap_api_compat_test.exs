@@ -1,7 +1,7 @@
-defmodule CoinmarketcapApi.V2ClientTest do
+defmodule CoinmarketcapApi.CompatTest do
   use ExUnit.Case, async: true
   doctest CoinmarketcapApi
-  import CoinmarketcapApi.V2Client
+  import CoinmarketcapApi
 
   test "tickers with limit" do
     {:ok, %{data: data}} = fetch_ticker(%{limit: 3})

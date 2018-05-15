@@ -1,8 +1,8 @@
-defmodule CoinmarketcapApi.V2ClientTest do
+defmodule CoinmarketcapApiTest do
   use ExUnit.Case, async: true
   doctest CoinmarketcapApi
   alias CoinmarketcapApi.Quote
-  import CoinmarketcapApi.V2Client
+  import CoinmarketcapApi
 
   test "all tickers" do
     {:ok, %{data: data}} = fetch_ticker()
