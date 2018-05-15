@@ -4,6 +4,7 @@ defmodule CoinmarketcapApi.V2Client do
   plug Tesla.Middleware.BaseUrl, "https://api.coinmarketcap.com/v2"
   plug CoinmarketcapApi.ResponseMiddleware
   plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.FollowRedirects
 
   def fetch_ticker() do
     get("/ticker/")
