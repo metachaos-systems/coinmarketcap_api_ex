@@ -5,7 +5,7 @@ defmodule CoinmarketcapApi.V2ClientTest do
 
   test "all tickers" do
     {:ok, %{data: data}} = fetch_ticker()
-    assert %{id:  _, quotes:  _} = data["1"]
+    assert %{id:  _, quotes:  _} = data[1]
   end
 
   test "tickers with limit" do

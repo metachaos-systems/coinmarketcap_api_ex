@@ -46,7 +46,7 @@ defmodule CoinmarketcapApi.ResponseMiddleware do
   defp construct_tickers(data) do
     if is_nil(data["id"]) do
       for {k, v} <- data, into: %{} do
-        {k, construct_tickers(v)}
+        {String.to_integer(k), construct_tickers(v)}
       end
     else
       construct_ticker(data)
