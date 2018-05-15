@@ -14,6 +14,7 @@ defmodule CoinmarketcapApi.V2Client do
     get("/ticker/", query: query)
   end
 
+  @deprecated "Use fetch_ticker with query option passed as keyword list"
   def fetch_ticker(opts) when is_map(opts) do
     query = for {k,v} <- Map.to_list(opts) do
       {k, v}
@@ -24,7 +25,6 @@ defmodule CoinmarketcapApi.V2Client do
   def fetch_ticker(id, query \\ []) do
     get("/ticker/#{id}/", query: query)
   end
-
 
   def fetch_listings() do
     get("/listings/")
