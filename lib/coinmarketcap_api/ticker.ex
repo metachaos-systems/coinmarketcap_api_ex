@@ -11,4 +11,6 @@ defmodule CoinmarketcapApi.Ticker do
     :total_supply,
     :website_slug
   ]
+  use ExConstructor
+
 end
