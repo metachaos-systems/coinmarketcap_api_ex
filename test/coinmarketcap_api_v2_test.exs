@@ -21,6 +21,8 @@ defmodule CoinmarketcapApi.V2ClientTest do
 
   test "bitcoin tickers" do
     {:ok, %{data: data}} = fetch_ticker(1)
+    assert is_integer(data.circulating_supply)
+    assert NaiveDateTime.to_string(data.last_updated)
     assert %{id: _, quotes:  _, symbol:  "BTC"} = data
   end
 
