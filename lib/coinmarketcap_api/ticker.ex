@@ -13,4 +13,19 @@ defmodule CoinmarketcapApi.Ticker do
   ]
   use ExConstructor
 
+  def parse(ticker) do
+    ticker
+    |> Map.update!(:circulating_supply, &parse_supply/1)
+    |> Map.update!(:total_supply, &parse_supply/1)
+    |> Map.update!(:max_supply, &parse_supply/1)
+    |> Map.update!(:last_updated, &parse_times/1)
+  end
+
+  def parse_supply(nil), do: nil
+  def parse_supply(float), do: round(float)
+
+  def parse_times(unix_time) do
+    DateTime.from_unix!(unix_time) |> DateTime.to_naive()
+  end
+
 end
