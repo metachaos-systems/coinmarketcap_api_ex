@@ -1,4 +1,6 @@
 defmodule CoinmarketcapApi.Ticker do
+  alias CoinmarketcapApi.Quote
+
   defstruct [
     :circulating_supply,
     :id,
@@ -19,6 +21,7 @@ defmodule CoinmarketcapApi.Ticker do
     |> Map.update!(:total_supply, &parse_supply/1)
     |> Map.update!(:max_supply, &parse_supply/1)
     |> Map.update!(:last_updated, &parse_times/1)
+    |> Map.update!(:quotes, &construct_quotes/1)
   end
 
   def parse_supply(nil), do: nil
@@ -30,7 +33,7 @@ defmodule CoinmarketcapApi.Ticker do
 
   def construct_quotes(quotes) when is_map(quotes) do
     for {currency, quote_map} <- quotes, into: %{} do
-      quote_struct = quote_map |> Quote.new() 
+      quote_struct = quote_map |> Quote.new()
       {currency, quote_struct}
     end
   end

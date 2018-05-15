@@ -1,6 +1,7 @@
 defmodule CoinmarketcapApi.V2ClientTest do
   use ExUnit.Case, async: true
   doctest CoinmarketcapApi
+  alias CoinmarketcapApi.Quote
   import CoinmarketcapApi.V2Client
 
   test "all tickers" do
@@ -14,7 +15,7 @@ defmodule CoinmarketcapApi.V2ClientTest do
   end
 
   test "tickers with start and limit" do
-    {:ok, %{data: data}} = fetch_ticker([start: 5, limit: 5])
+    {:ok, %{data: data}} = fetch_ticker([start: 1, limit: 5])
     {id, ticker_data} = hd(Map.to_list(data))
     assert %{id: ^id, quotes:  _, symbol:  _} = ticker_data
   end
@@ -31,5 +32,12 @@ defmodule CoinmarketcapApi.V2ClientTest do
   test "global data" do
     {:ok, %{data: data}} = fetch_global_data()
     assert %{active_cryptocurrencies:  _} = data
+  end
+
+  test "ticker quotes are converted to structs" do
+    {:ok, %{data: data}} = fetch_ticker(1)
+    quote_incoming = data.quotes["USD"]
+    assert %{price: _} = quote_incoming
+    assert %Quote{} = quote_incoming
   end
 end
