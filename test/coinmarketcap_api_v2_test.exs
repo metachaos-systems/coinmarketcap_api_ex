@@ -4,30 +4,28 @@ defmodule CoinmarketcapApi.V2ClientTest do
   import CoinmarketcapApi.V2Client
 
   test "all tickers" do
-    {:ok, data} = fetch_ticker()
-    assert [%{"id" => _, "24h_volume_usd" => _} | _ ] = data
+    {:ok, %{data: data}} = fetch_ticker()
+    assert %{"id" => _, "quotes" => _} = data["1"]
   end
 
   test "tickers with limit" do
-    {:ok, data} = fetch_ticker(%{limit: 3})
-    assert length(data) == 3
+    {:ok, %{data: data}} = fetch_ticker([limit: 3])
+    assert length(Map.to_list(data)) == 3
   end
 
   test "tickers with start and limit" do
-    {:ok, data} = fetch_ticker(%{start: 5, limit: 5})
-    assert length(data) == 5
-
-    [ head | _ ] = data
-    assert head["rank"] == "6"
+    {:ok, %{data: data}} = fetch_ticker([start: 5, limit: 5])
+    {id, ticker_data} = hd(Map.to_list(data))
+    assert is_integer(ticker_data["id"])
   end
 
   test "bitcoin tickers" do
-    {:ok, data} = fetch_ticker("bitcoin")
-    assert [%{"id" => _, "24h_volume_usd" => _, "symbol" => "BTC"} | _ ] = data
+    {:ok, %{data: data}} = fetch_ticker(1)
+    assert %{"id" => _, "quotes" => _, "symbol" => "BTC"} = data
   end
 
   test "global data" do
-    {:ok, data} = fetch_global_data()
-    assert %{"active_assets" => _} = data
+    {:ok, %{data: data}} = fetch_global_data()
+    assert %{"active_cryptocurrencies" => _} = data
   end
 end
