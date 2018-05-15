@@ -1,6 +1,6 @@
 defmodule CoinmarketcapApi.ResponseMiddleware do
   @behaviour Tesla.Middleware
-  alias CoinmarketcapApi.Ticker
+  alias CoinmarketcapApi.{Ticker, Response, GlobalData}
 
   def call(env, next, _options) do
     env
@@ -9,24 +9,38 @@ defmodule CoinmarketcapApi.ResponseMiddleware do
   end
 
   def handle_response(response) do
-    # {:ok, env_test} = response
-    # IO.inspect Map.keys(env_test)
-    with {:ok, env = %{body: %{"data" => data, "metadata" => meta}, url: url}} <- response do
-      data =
-        if is_ticker_endpoint?(url) do
-          construct_tickers(data)
-        else
-          data
-        end
+    with {:ok, env = %{body: body = %{"data" => data, "metadata" => meta}, url: url}} <- response do
+      cmc_response =
+        body
+        |> Response.new()
+        |> build_structs(url)
 
-      {:ok, %{data: data, metadata: meta}}
+      {:ok, cmc_response}
     else
       err -> err
     end
   end
 
+  @doc """
+  Matches endpoints and converts to corresponding structs
+  """
+  def build_structs(response, url) do
+    data =
+      cond do
+        is_ticker_endpoint?(url) -> construct_tickers(response.data)
+        is_global_data_endpoint?(url) -> GlobalData.new(response.data)
+        true -> response.data
+      end
+
+    Map.put(response, :data, data)
+  end
+
   def is_ticker_endpoint?(url) do
     String.contains?(url, "/v2/ticker/")
+  end
+
+  def is_global_data_endpoint?(url) do
+    String.contains?(url, "/v2/global/")
   end
 
   defp construct_tickers(data) do
