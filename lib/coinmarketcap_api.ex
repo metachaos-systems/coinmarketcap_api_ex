@@ -12,6 +12,7 @@ defmodule CoinmarketcapApi do
 
   Example response:
 
+  ```
   {
     "data": {
         "1": {
@@ -64,6 +65,7 @@ defmodule CoinmarketcapApi do
         "error": null
     }
   ]
+  ```
   """
   def fetch_ticker() do
     get("/ticker/")
@@ -87,6 +89,7 @@ defmodule CoinmarketcapApi do
   Returns ticker data for a specific cryptocurrency. Use the "id" field from the Listings endpoint in the URL.
   Example response:
 
+  ```
   {
     "data": {
         "id": 1,
@@ -116,6 +119,7 @@ defmodule CoinmarketcapApi do
 
   }
 
+  ```
   """
   def fetch_ticker(id, query \\ []) do
     get("/ticker/#{id}/", query: query)
@@ -125,6 +129,7 @@ defmodule CoinmarketcapApi do
   Returns all active cryptocurrency listings. Use fetch_ticker to query more information for a specific cryptocurrency.
 
   Example response:
+  ```
   {
     "data": [
         {
@@ -148,6 +153,7 @@ defmodule CoinmarketcapApi do
     }
   ]
 
+  ```
   """
   def fetch_listings() do
     get("/listings/")
@@ -162,6 +168,7 @@ defmodule CoinmarketcapApi do
 
   Example response:
 
+  ```
   {
     "data": {
         "active_cryptocurrencies": 1594,
@@ -181,6 +188,7 @@ defmodule CoinmarketcapApi do
     }
   }
 
+  ```
   """
   def fetch_global_data(%{convert: currency}) do
     get("/global/", query: [convert: currency])

@@ -28,6 +28,7 @@ All ticker related functions return either a Ticker struct or a list of Ticker s
 
 Ticker structs have the following shape:
 
+
 ```
 %CoinmarketcapApi.Ticker{
   circulating_supply: 17035225,
@@ -51,6 +52,14 @@ Ticker structs have the following shape:
   website_slug: "bitcoin"
 }
 ```
+
+Examples:
+
+* CoinmarketcapApi.fetch_ticker()
+* CoinmarketcapApi.fetch_ticker([start: 100, limit: 50])
+* CoinmarketcapApi.fetch_ticker([start: 100, limit: 50, convert: "EUR"])
+* CoinmarketcapApi.fetch_ticker(1)
+* CoinmarketcapApi.fetch_ticker(1, convert: "EUR")
 
 Ticker values are parsed to the most fitting Elixir datatypes:
 
