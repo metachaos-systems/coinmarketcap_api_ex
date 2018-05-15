@@ -2,15 +2,17 @@ defmodule CoinmarketcapApi.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :coinmarketcap_api,
-     version: "1.2.2",
-     elixir: "~> 1.4",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     compilers: Mix.compilers(),
-     package: package(),
-     description: description(),
-     deps: deps()]
+    [
+      app: :coinmarketcap_api,
+      version: "2.0.0",
+      elixir: "~> 1.6",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      compilers: Mix.compilers(),
+      package: package(),
+      description: description(),
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -33,7 +35,7 @@ defmodule CoinmarketcapApi.Mixfile do
     [
       {:poison, "~> 3.0"},
       {:httpoison, "~> 1.0"},
-      {:credo, "~> 0.3", only: [:test,:dev]},
+      {:credo, "~> 0.3", only: [:test, :dev]},
       {:ex_doc, ">= 0.0.0", only: [:dev]},
       {:tesla, "1.0.0-beta.1"},
       {:jason, ">= 1.0.0"},
@@ -41,20 +43,23 @@ defmodule CoinmarketcapApi.Mixfile do
     ]
   end
 
-
   defp description do
     """
-    Coinmarketcap.com API wrapper for Elixir/Erlang.
+    Coinmarketcap.com v2 API client for Elixir/Erlang.
     Provides access to ticker and historical data for cryptocurrencies like Ethereum, Bitcoin, Monero, etc.
     """
   end
 
   defp package do
-    [# These are the default files included in the package
-     files: ["lib", "mix.exs", "README*", "LICENSE*"],
-     maintainers: ["ontofractal"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/cyberpunk-ventures/coinmarketcap_api_ex"}]
-   end
-
+    # These are the default files included in the package
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["ontofractal"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/cyberpunk-ventures/coinmarketcap_api_ex",
+        "Cyberpunk Ventures" => "https://cyberpunk.ventures"
+      }
+    ]
+  end
 end
