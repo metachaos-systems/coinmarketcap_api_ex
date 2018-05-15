@@ -9,7 +9,7 @@ defmodule CoinmarketcapApi.ResponseMiddleware do
   end
 
   def handle_response(response) do
-    with {:ok, env = %{body: body = %{"data" => data, "metadata" => meta}, url: url}} <- response do
+    with {:ok, %{body: body, url: url}} <- response do
       cmc_response =
         body
         |> Response.new()

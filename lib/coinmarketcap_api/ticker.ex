@@ -28,4 +28,11 @@ defmodule CoinmarketcapApi.Ticker do
     DateTime.from_unix!(unix_time) |> DateTime.to_naive()
   end
 
+  def construct_quotes(quotes) when is_map(quotes) do
+    for {currency, quote_map} <- quotes, into: %{} do
+      quote_struct = quote_map |> Quote.new() 
+      {currency, quote_struct}
+    end
+  end
+
 end
