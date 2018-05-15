@@ -20,7 +20,7 @@ Configuration is not required.
 
 # Documentation
 
-More docs and example return values can be found at [hexdocs](https://hexdocs.pm/coinmarketcap_api).
+More docs and example return values can be found at [hexdocs](https://hexdocs.pm/coinmarketcap_api/2.0.0/CoinmarketcapApi.html).
 
 # Tickers
 
