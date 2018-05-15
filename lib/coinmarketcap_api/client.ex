@@ -15,7 +15,9 @@ defmodule CoinmarketcapApi.V2Client do
   end
 
   def fetch_ticker(opts) when is_map(opts) do
-    query = Map.to_list(opts)
+    query = for {k,v} <- Map.to_list(opts) do
+      {k, v}
+    end
     get("/ticker/", query: query)
   end
 
