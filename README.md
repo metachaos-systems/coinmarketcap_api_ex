@@ -4,6 +4,10 @@ This module implements v2 Coinmarketcap API with minimal changes to API structur
 
 All CMC API endpoints are called using fetch_#{endpoint} functions and return success tuple with `%CoinmarketcapApi.Response{}` containing :data and :metadata.
 
+# Warning
+
+Until Tesla package gets a stable 1.0.0 release, please use `2.0.0-rc.1` version of coinmarketcap_api_ex.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/coinmarketcap_api_ex), the package can be installed as:
@@ -11,7 +15,7 @@ If [available in Hex](https://hex.pm/coinmarketcap_api_ex), the package can be i
   1. Add coinmarketcap_api_ex to your list of dependencies in `mix.exs`:
   ```
         def deps do
-          [{:coinmarketcap_api_ex, "~> 2.0.0"}]
+          [{:coinmarketcap_api_ex, "2.0.0-rc.1"}]
         end
   ```
 # Configuration
