@@ -9,11 +9,11 @@ All CMC API endpoints are called using fetch_#{endpoint} functions and return su
 If [available in Hex](https://hex.pm/coinmarketcap_api_ex), the package can be installed as:
 
   1. Add coinmarketcap_api_ex to your list of dependencies in `mix.exs`:
-
+  ```
         def deps do
           [{:coinmarketcap_api_ex, "~> 2.0.0"}]
         end
-
+  ```
 # Configuration
 
 Configuration is not required.
