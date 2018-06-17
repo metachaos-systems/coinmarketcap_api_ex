@@ -4,7 +4,7 @@ defmodule CoinmarketcapApi.Mixfile do
   def project do
     [
       app: :coinmarketcap_api,
-      version: "2.0.0-rc.1",
+      version: "2.0.1",
       elixir: "~> 1.6",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -37,7 +37,7 @@ defmodule CoinmarketcapApi.Mixfile do
       {:httpoison, "~> 1.0"},
       {:credo, "~> 0.3", only: [:test, :dev]},
       {:ex_doc, ">= 0.0.0", only: [:dev]},
-      {:tesla, "1.0.0-beta.1"},
+      {:tesla, "~> 1.0.0"},
       {:jason, ">= 1.0.0"},
       {:exconstructor, "~> 1.0"}
     ]
