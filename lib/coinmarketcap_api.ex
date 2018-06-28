@@ -2,10 +2,10 @@ defmodule CoinmarketcapApi do
   alias CoinmarketcapApi.Ticker
   use Tesla
 
-  plug(Tesla.Middleware.BaseUrl, "https://api.coinmarketcap.com/v2")
-  plug(CoinmarketcapApi.ResponseMiddleware)
-  plug(Tesla.Middleware.JSON)
-  plug(Tesla.Middleware.FollowRedirects)
+  plug Tesla.Middleware.BaseUrl, "https://api.coinmarketcap.com/v2"
+  plug CoinmarketcapApi.ResponseMiddleware
+  plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.FollowRedirects
 
   @doc """
   Returns cryptocurrency ticker data ordered by marketcap rank. The maximum number of results per call is 100. Pagination is possible by using the start and limit parameters.
